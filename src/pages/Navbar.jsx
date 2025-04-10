@@ -1,14 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-function Navbar() {
+const Navbar = () => {
   return (
-    <nav style={{ padding: '1rem', background: '#eee' }}>
-      <Link to="/" style={{ marginRight: '1rem' }}>Home</Link>
-      <Link to="/register" style={{ marginRight: '1rem' }}>Register</Link>
-      <Link to="/login">Login</Link>
+    <nav style={{ padding: '10px', backgroundColor: '#f3f3f3' }}>
+      <h2>Enuncia Global</h2>
     </nav>
   );
-}
+};
 
 export default Navbar;
