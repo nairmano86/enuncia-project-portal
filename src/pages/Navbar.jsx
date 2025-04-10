@@ -1,4 +1,14 @@
 import { Link } from 'react-router-dom';
+import Navbar from './pages/Navbar'; // or './components/Navbar' depending on your folder structure
+
+function App() {
+  return (
+    <div>
+      <Navbar />
+      <h1>Welcome to Enuncia Project Portal 🚀</h1>
+    </div>
+  );
+}
 
 function Navbar() {
   return (
