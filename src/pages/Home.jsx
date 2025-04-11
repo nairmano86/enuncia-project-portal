@@ -3,8 +3,8 @@ import React from 'react';
 function Home() {
   return (
     <div>
-      <h1>Welcome to Enuncia Project Portal 🚀</h1>
-      <p>This is the home page.</p>
+      <h2>Home Page</h2>
+      <p>This is the Home page content.</p>
     </div>
   );
 }
