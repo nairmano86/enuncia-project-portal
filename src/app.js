@@ -1,12 +1,9 @@
-function App() {
-  return (
-    <Router>
-      <Navbar />
-      <div>Hello from App</div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </Router>
-  );
-}
+<Router>
+  <Navbar />
+  <div style={{ padding: '20px' }}>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
+    </Routes>
+  </div>
+</Router>
