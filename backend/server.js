@@ -3,6 +3,11 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
+
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
