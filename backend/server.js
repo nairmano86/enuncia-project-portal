@@ -3,17 +3,18 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 
-app.get("/", (req, res) => {
-  res.send("API is running...");
-});
+dotenv.config(); // Load .env first
 
-
-dotenv.config();
-const app = express();
+const app = express(); // Then initialize Express
 const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(express.json());
+
+// Root Route
+app.get("/", (req, res) => {
+  res.send("API is running...");
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -24,5 +25,4 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
     console.log('MongoDB connected');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
-  .catch(err => console.error(err));
-
+  .catch(err => console.error('MongoDB connection failed:', err));
