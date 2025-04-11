@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Home = () => {
+function Home() {
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>Dashboard</h1>
-      <p>This is the homepage of your Enuncia Project Portal.</p>
+    <div>
+      <h1>Welcome to Enuncia Project Portal 🚀</h1>
+      <p>This is the home page.</p>
     </div>
   );
-};
+}
 
 export default Home;
