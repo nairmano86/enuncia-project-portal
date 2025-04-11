@@ -1,12 +1,12 @@
 import React from 'react';
 
-const About = () => {
+function About() {
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>About Page</h1>
-      <p>Welcome to the about section of Enuncia Project Portal.</p>
+    <div>
+      <h1>About Us</h1>
+      <p>This portal is built for managing projects at Enuncia.</p>
     </div>
   );
-};
+}
 
 export default About;
