@@ -1,14 +1,21 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const cors = require('cors'); // ✅ Import cors
 const authRoutes = require('./routes/authRoutes');
 
-dotenv.config(); // Load .env first
+dotenv.config();
 
-const app = express(); // Then initialize Express
+const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
+// ✅ Enable CORS for your frontend domain
+app.use(cors({
+  origin: 'https://portal.enuncia.work',
+  credentials: true
+}));
+
+// Middleware to parse JSON
 app.use(express.json());
 
 // Root Route
