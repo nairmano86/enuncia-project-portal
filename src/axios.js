@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../axios';
 
 const instance = axios.create({
   baseURL: 'https://enuncia-backend.onrender.com/api', // replace with your actual backend base URL
