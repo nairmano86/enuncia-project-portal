@@ -8,6 +8,8 @@ function Register() {
     password: '',
     role: 'freelancer'
   });
+  const [loading, setLoading] = useState(false); // New loading state
+  const [message, setMessage] = useState(''); // New message state
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -15,14 +17,18 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // Start loading
+    setMessage(''); // Clear any previous messages
     try {
-      // Use the relative endpoint, as axios already has the base URL set
       const res = await axios.post('/auth/register', formData);
-      alert('Registered successfully!');
+      setMessage('Registered successfully!');
       console.log(res.data);
+      setFormData({ name: '', email: '', password: '', role: 'freelancer' }); // Clear form after successful submission
     } catch (err) {
-      alert('Registration failed!');
+      setMessage('Registration failed!');
       console.error(err.response?.data || err.message);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -32,25 +38,46 @@ function Register() {
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
-          <input type="text" name="name" onChange={handleChange} required />
+          <input
+            type="text"
+            name="name"
+            onChange={handleChange}
+            value={formData.name}
+            required
+          />
         </div>
         <div>
           <label>Email:</label>
-          <input type="email" name="email" onChange={handleChange} required />
+          <input
+            type="email"
+            name="email"
+            onChange={handleChange}
+            value={formData.email}
+            required
+          />
         </div>
         <div>
           <label>Password:</label>
-          <input type="password" name="password" onChange={handleChange} required />
+          <input
+            type="password"
+            name="password"
+            onChange={handleChange}
+            value={formData.password}
+            required
+          />
         </div>
         <div>
           <label>Role:</label>
-          <select name="role" onChange={handleChange}>
+          <select name="role" onChange={handleChange} value={formData.role}>
             <option value="freelancer">Freelancer</option>
             <option value="employee">Employee</option>
           </select>
         </div>
-        <button type="submit">Register</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Registering...' : 'Register'}
+        </button>
       </form>
+      <p>{message}</p> {/* Display success or error message */}
     </div>
   );
 }
