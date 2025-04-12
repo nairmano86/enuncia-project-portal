@@ -16,7 +16,7 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://enuncia-backend-url/api/auth/register', formData);
+      const res = await axios.post('https://enuncia-backend.onrender.com/api/auth/register', formData);
       alert('Registered successfully!');
       console.log(res.data);
     } catch (err) {
