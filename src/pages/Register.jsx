@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../utils/axios'; // Correct import
+import axios from '../src/utils/axios'; // Correct import
 
 function Register() {
   const [formData, setFormData] = useState({
