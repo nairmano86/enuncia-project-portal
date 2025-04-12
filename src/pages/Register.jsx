@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../utils/axios';
+import axios from '../utils/axios'; // Correct import
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -16,7 +16,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('https://enuncia-backend.onrender.com/api/auth/register', formData);
+      // Use the relative endpoint, as axios already has the base URL set
+      const res = await axios.post('/auth/register', formData);
       alert('Registered successfully!');
       console.log(res.data);
     } catch (err) {
