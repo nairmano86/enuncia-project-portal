@@ -12,8 +12,11 @@ function Login() {
       const res = await axios.post('/auth/login', { email, password });
       setMessage('Login successful');
       console.log(res.data); // you might want to store the token or user info
+      // For example, store token in localStorage (if your backend returns a token)
+      localStorage.setItem('authToken', res.data.token);
     } catch (err) {
       setMessage('Login failed');
+      console.error(err.response?.data || err.message); // Log detailed error response
     }
   };
 
