@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../api-utils/axios';  // Corrected relative path
+import axios from 'api-utils/axios';  // Corrected relative path
 
 function Login() {
   const [email, setEmail] = useState('');
