@@ -1,43 +1,55 @@
 import React, { useState } from 'react';
-import axios from '../axios';
+import axios from 'axios';
 
 function Register() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    role: 'freelancer'
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('/auth/register', { email, password });
-      setMessage('Registration successful');
+      const res = await axios.post('https://enuncia-backend-url/api/auth/register', formData);
+      alert('Registered successfully!');
       console.log(res.data);
     } catch (err) {
-      setMessage('Registration failed');
+      alert('Registration failed!');
+      console.error(err.response?.data || err.message);
     }
   };
 
   return (
     <div style={{ padding: '2rem' }}>
-      <h2>Freelancer Registration</h2>
+      <h2>Freelancer Registration Page</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        /><br /><br />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        /><br /><br />
+        <div>
+          <label>Name:</label>
+          <input type="text" name="name" onChange={handleChange} required />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="email" name="email" onChange={handleChange} required />
+        </div>
+        <div>
+          <label>Password:</label>
+          <input type="password" name="password" onChange={handleChange} required />
+        </div>
+        <div>
+          <label>Role:</label>
+          <select name="role" onChange={handleChange}>
+            <option value="freelancer">Freelancer</option>
+            <option value="employee">Employee</option>
+          </select>
+        </div>
         <button type="submit">Register</button>
       </form>
-      <p>{message}</p>
     </div>
   );
 }
