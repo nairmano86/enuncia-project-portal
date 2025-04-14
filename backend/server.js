@@ -1,7 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const cors = require('cors'); // ✅ Import cors
+const cors = require('cors');
 const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
@@ -9,9 +9,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Enable CORS for your frontend domain
+// ✅ Enable CORS for frontend domain
 app.use(cors({
-  origin: 'https://portal.enuncia.work',
+  origin: 'https://portal.enuncia.work', // your deployed frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // optional: allowed methods
   credentials: true
 }));
 
