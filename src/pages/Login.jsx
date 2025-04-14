@@ -13,19 +13,18 @@ function Login() {
     try {
       const res = await axios.post('/auth/login', { email, password });
       setMessage('Login successful');
-      console.log('Login response:', res.data);
+      console.log(res.data);
 
-      // Save token in localStorage
       localStorage.setItem('authToken', res.data.token);
 
       // Redirect based on role
-      const role = res.data.user?.role;
-      if (role === 'employee') {
+      const userRole = res.data.user?.role;
+      if (userRole === 'employee') {
         navigate('/employee-dashboard');
-      } else if (role === 'freelancer') {
+      } else if (userRole === 'freelancer') {
         navigate('/freelancer-dashboard');
       } else {
-        setMessage('Unknown role');
+        setMessage('Unknown user role');
       }
     } catch (err) {
       setMessage('Login failed');
