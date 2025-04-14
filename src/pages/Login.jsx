@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from '../api-utils/axiosInstance';  // Corrected relative path
+import axios from '../api-utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
@@ -12,21 +12,21 @@ function Login() {
     e.preventDefault();
     try {
       const res = await axios.post('/auth/login', { email, password });
-      setMessage('Login successful');
-      console.log('Login response:', res.data);
 
-      // Save token in localStorage
       localStorage.setItem('authToken', res.data.token);
+      setMessage('Login successful');
 
-      // Redirect based on role
-      const role = res.data.user?.role;
-      if (role === 'employee') {
+      const userRole = res.data.role; // ✅ Corrected based on backend
+
+      if (userRole === 'employee') {
         navigate('/employee-dashboard');
-      } else if (role === 'freelancer') {
+      } else if (userRole === 'freelancer') {
         navigate('/freelancer-dashboard');
       } else {
         setMessage('Unknown role');
+        console.error('Unknown role:', userRole);
       }
+
     } catch (err) {
       setMessage('Login failed');
       console.error(err.response?.data || err.message);
