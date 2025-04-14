@@ -1,22 +1,35 @@
 import React, { useState } from 'react';
-import axios from '../api-utils/axiosInstance';  // Corrected relative path
+import axios from '../api-utils/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const res = await axios.post('/auth/login', { email, password });
       setMessage('Login successful');
-      console.log(res.data); // you might want to store the token or user info
-      // For example, store token in localStorage (if your backend returns a token)
+      console.log('Login response:', res.data);
+
+      // Save token in localStorage
       localStorage.setItem('authToken', res.data.token);
+
+      // Redirect based on role
+      const role = res.data.user?.role;
+      if (role === 'employee') {
+        navigate('/employee-dashboard');
+      } else if (role === 'freelancer') {
+        navigate('/freelancer-dashboard');
+      } else {
+        setMessage('Unknown role');
+      }
     } catch (err) {
       setMessage('Login failed');
-      console.error(err.response?.data || err.message); // Log detailed error response
+      console.error(err.response?.data || err.message);
     }
   };
 
